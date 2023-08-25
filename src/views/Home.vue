@@ -22,11 +22,12 @@ export default {
   data() {
     return {
       tasks: [],
+      baseUrl: 'http://localhost:3000/tasks'
     }
   },
   methods: {
     async addTask(task) {
-      const res = await fetch('http://localhost:3000/tasks', {
+      const res = await fetch(`${this.baseUrl}`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -39,7 +40,7 @@ export default {
     },
     async deleteTask(id) {
       if (confirm('Are you sure?')) {
-        const res = await fetch(`http://localhost:3000/tasks/${id}`, {
+        const res = await fetch(`${this.baseUrl}/${id}`, {
           method: 'DELETE',
         })
 
@@ -52,7 +53,7 @@ export default {
       const taskToToggle = await this.fetchTask(id)
       const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }
 
-      const res = await fetch(`http://localhost:3000/tasks/${id}`, {
+      const res = await fetch(`${this.baseUrl}/${id}`, {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json',
@@ -65,13 +66,13 @@ export default {
       )
     },
     async fetchTasks() {
-      const res = await fetch('http://localhost:3000/tasks')
+      const res = await fetch(`${this.baseUrl}`)
       const data = await res.json()
       return data
     },
 
     async fetchTask(id) {
-      const res = await fetch(`http://localhost:3000/tasks/${id}`)
+      const res = await fetch(`${this.baseUrl}/${id}`)
       const data = await res.json()
       return data
     },

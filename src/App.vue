@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+    <div class="container">
     <Header
       @toggle-add-task="toggleAddTask"
       title="Task Tracker"
@@ -44,6 +44,13 @@ export default {
 
 body {
   font-family: 'Poppins', sans-serif;
+  display: flex;
+}
+
+#app {
+display: grid;
+grid-template-columns: 1fr;
+
 }
 
 .container {
